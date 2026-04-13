@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from app.utilities.flash import get_flashed_messages
 from jinja2 import Environment, FileSystemLoader
 from app.config import get_settings
+from .todo_api import router as todo_router
 
 
 template_env = Environment(loader = FileSystemLoader("app/templates",), )
@@ -13,5 +14,7 @@ static_files = StaticFiles(directory="app/static")
 
 router = APIRouter(tags=["Jinja Based Endpoints"], include_in_schema=get_settings().env.lower() in ["dev","development"])
 api_router = APIRouter(tags=["API Endpoints"], prefix="/api")
+
+api_router.include_router(todo_router)
 
 from . import (index, login, register, admin_home, user_home, users, logout)
