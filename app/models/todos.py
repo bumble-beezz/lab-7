@@ -1,7 +1,6 @@
 from sqlmodel import Field, SQLModel, Relationship
 from typing import Optional, List
 from datetime import datetime, timezone
-from app.models.user import User
 
 class TodoBase(SQLModel):
     title: str = Field(index=True)
