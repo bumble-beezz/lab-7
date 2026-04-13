@@ -1,6 +1,7 @@
-from sqlmodel import Field, SQLModel
-from typing import Optional
+from sqlmodel import Field, SQLModel, Relationship
+from typing import Optional, List
 from pydantic import EmailStr
+from app.models.todos import Todo
 
 
 class UserBase(SQLModel,):
@@ -11,3 +12,4 @@ class UserBase(SQLModel,):
 
 class User(UserBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
+    todos: List["Todo"] = Relationship(back_populates="user")
